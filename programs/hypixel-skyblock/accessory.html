@@ -22,13 +22,15 @@
     setInterval(check,8000);
      function check(){
              document.cookies=zero;
+       var t=document.cookies.split('');
        for(var i=0;i<accesories.length;i++){
          if(document.getElementById("c"+i).checked){
-            var t=document.cookies.split('');
+            
            t[i]='1';
            
             }
       }
+       document.cookies=t.join('');
      }
     function resetbutton(){
       document.cookies.length=accesories.length;
