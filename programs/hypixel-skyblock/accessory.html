@@ -16,11 +16,12 @@
       wrapper.appendChild(el);
       wrapper.appendChild(en);
       wrapper.appendChild(em);}
-    var button=document.getElementById("button");
-    button.setAttribute("onclick","resetbutton");
-    wrapper.appendChild(button);
-    setInterval(check,8000);
+    //var button=document.getElementById("button");
+    //button.setAttribute("onclick",resetbutton);
+    //wrapper.appendChild(button);
+    setInterval(check,5000);
      function check(){
+       console.log("checked");
              document.cookies=zero;
        var t=document.cookies.split('');
        for(var i=0;i<accesories.length;i++){
