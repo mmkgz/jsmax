@@ -3,7 +3,9 @@
   <script>
     var wrapper=document.getElementById("wrapper");
     var accesories=["test","butts"];
-    if (document.cookies.length==0)document.cookies.length=accesories.length;
+    
+    var zero="";for(var i=0;i<accesories.length;i++){zero+="0"}
+    if (document.cookies==null)document.cookies=zero;
     for(var i=0;i<accesories.length;i++){  
     var el=document.createTextNode(accesories[i]);
     var en=document.createElement("input","");
@@ -19,7 +21,7 @@
     wrapper.appendChild(button);
     setInterval(check,8000);
      function check(){
-             document.cookies.length=accesories.length;
+             document.cookies=zero;
        for(var i=0;i<accesories.length;i++){
          if(document.getElementById("c"+i).checked){
             var t=document.cookies.split('');
@@ -30,7 +32,7 @@
      }
     function resetbutton(){
       document.cookies.length=accesories.length;
-    document.cookies=0;
+    document.cookies=zero;
     }
   </script>
 </html>
