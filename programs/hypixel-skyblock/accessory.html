@@ -8,17 +8,28 @@
     var en=document.createElement("input","");
       en.setAttribute("id","c"+i);
       en.setAttribute("type","checkbox");
-      en.setAttribute("checked","true");
+      if(document.cookies.charAt(i)=='1')en.setAttribute("checked","true");
       var em=document.createElement("br");
       wrapper.appendChild(el);
       wrapper.appendChild(en);
       wrapper.appendChild(em);}
-//     while (true){
-//       for(var i=0;i<accesories.length;i++){
-//         if(document.getElementById("c"+i).checked){
+    var button=document.getElementById("button");
+    button.setAttribute("onclick","resetbutton");
+    wrapper.appendChild(button);
+    setInterval(check,8000);
+     function check(){
+             document.cookies.length=accesories.length;
+       for(var i=0;i<accesories.length;i++){
+         if(document.getElementById("c"+i).checked){
+            var t=document.cookies.split('');
+           t[i]='1';
            
-//            }
-//       }
-//     }
+            }
+      }
+     }
+    function resetbutton(){
+      document.cookies.length=accesories.length;
+    document.cookies=0;
+    }
   </script>
 </html>
