@@ -3,6 +3,7 @@
   <script>
     var wrapper=document.getElementById("wrapper");
     var accesories=["test","butts"];
+    if (document.cookies.length=0)document.cookies.length=accesories.length;
     for(var i=0;i<accesories.length;i++){  
     var el=document.createTextNode(accesories[i]);
     var en=document.createElement("input","");
