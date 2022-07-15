@@ -1,1 +1,22 @@
-
+<!DOCTYPE html>
+<html>
+  <div id="wrapper">
+    
+  </div>
+  <script>
+    var wrapper=document.getElementById("wrapper");
+    var accesories=["test"];
+    for (int i=0;i<accesories.length;i++){
+      var el=document.createElement("label",accesories[i]);
+      el.setAttribute("for","c"+i);
+      var en=document.createElement("input","");
+      en.setAttribute("id","c"+i);
+      en.setAttribute("type","checkbox");
+      en.setAttribute("name","c"+i);
+      var em=document.createElement("br");
+      wrapper.appendChild(el);
+      wrapper.appendChild(en);
+      wrapper.appendChild(em);
+    }
+  </script>
+</html>
