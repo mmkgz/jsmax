@@ -1,1 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <p>nothing too see here, move on please.</p>
+    <style>
+       .topnav {
+  background-color: #333;
+  overflow: hidden;
+}
 
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+.topnav input[type=text] {
+  float: right;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
+
+    </style>
+    
+
+<head>
+  <div class="topnav">
+    <a class="active" href="#home">Home</a>
+    <a onclick="filter()">Filter</a>
+    
+    <input id="searchbar" type="text" placeholder="Search here...">
+    <input id="submit"type="submit" style="display: none" />
+  </div>
+  <p id="results"style="text-align:center;">NaN results</p>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 500px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<div id="items">
+
+
+
+<div class="row">
+  <div class="column" style="background-color:#aaa;">
+    <h2>Column 1</h2>
+    <p>Some text..</p>
+  </div>
+  <div class="column" style="background-color:#bbb;">
+    <h2>Column 2</h2>
+    <p>Some text..</p>
+  </div>
+</div>
+
+</div>
+
+ <script>
+       var lists=[];
+       var icons=[];
+       document.getElementById("results").innerText=skindata["data"].length+" results.";
+       for (var i=0;i<skindata["data"].length;i++){
+            lists[i]=(skindata["data"][i]["displayName"]);
+          icons[i]=(skindata["data"][i]["displayIcon"]);
+       }
+       update();
+       var search=
+       document.getElementById("searchbar");search.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    //do
+   
+    lists=[];
+    icons=[];
+    
+    
+    var j=0;
+    for(var i =0;i<skindata["data"].length;i++){
+      
+      if((skindata["data"][i]["displayName"].toLowerCase()).includes(search.value.toLowerCase())){
+        lists[j]=skindata["data"][i]["displayName"];
+        icons[j]=skindata["data"][i]["displayIcon"];
+
+        
+        j++;
+      }
+    }
+    update();
+    document.getElementById("results").innerText=j+1+" results.";
+    
+
+    event.preventDefault();
+    document.getElementById("submit").click();
+  }
+});
+function filter(){
+   
+}
+function getKeyByValue(object, value) {
+  return Object.keys(object).find(key => object[key] === value);
+}
+
+function update(){
+  //clear body tag
+  body=document.getElementById("items");
+  while (body.firstChild) {
+  
+    body.removeChild(body.lastChild);
+  }
+
+  //add all items
+  var rowEnter=null;
+  var side;
+  var row=0;
+   for (var i=0;i<lists.length+1;i++){
+    side=0;
+    var title=lists[i],desc=icons[i];
+    var colEnter=document.createElement("div");
+    colEnter.setAttribute("class","column");
+     if(i%2==0){
+     
+      rowEnter=document.createElement("div");
+    rowEnter.setAttribute("class","row");
+      
+      var titleB=document.createElement("h2");
+      titleB.textContent=title;
+      colEnter.appendChild(titleB);
+      var descB=document.createElement("img");
+      descB.setAttribute("src",desc);
+      colEnter.appendChild(descB);
+      if(i==lists.length-1){
+      colEnter.setAttribute("style","background-color:#aaa;");
+      } 
+      
+     }
+  
+
+  else {
+    side=1;
+     
+    var titleB=document.createElement("h2");
+      titleB.textContent=title;
+      colEnter.appendChild(titleB);
+      var descB=document.createElement("img");
+      descB.setAttribute("src",desc);
+      colEnter.appendChild(descB);
+    if(i==lists.length-1){
+      colEnter.setAttribute("style","background-color:#aaa;");
+  if((row+side)%2)colEnter.setAttribute("style","background-color:#bbb;");
+      body.appendChild(rowEnter);
+      row++;
+    }
+  }
+  colEnter.setAttribute("style","background-color:#aaa;");
+  if((row+side)%2)colEnter.setAttribute("style","background-color:#bbb;");
+  rowEnter.appendChild(colEnter);
+  if(i%2==0){body.appendChild(rowEnter);row++;console.log(i);}
+  
+   }
+}
+      </script>
+</html>
