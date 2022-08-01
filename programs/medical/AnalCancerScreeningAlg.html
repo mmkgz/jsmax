@@ -1,1 +1,180 @@
 
+//v 0.1.25 beta
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet"href="hrafreq.css">
+  <title>HRA Frequency Calculator</title>
+  <body onload="init()"></body>
+  <div style="background-color:black;width:100%;height:100vmax;position:absolute;" >
+    
+  <div id="form" style="text-align:center;background-color:rgb(255, 187, 0);left:15%;width:70%;height:100vmax;position:absolute;font-size: larger;font-family: 'Courier New', Courier, monospace; font-weight: bold;">
+    
+    <h1>HRA Frequency Calculator</h1>
+    <br><br><br>
+    <p id="q0">What is the patient's gender?</p>
+    <label for="yes0">ANATOMIC MALE</label>
+    <input onclick="disablePAP()"type="radio"id="yes0"name="gen"><br>
+    <label for="no0">ANATOMIC FEMALE</label>
+    <input onclick="enablePAP()"type="radio"id="no0"name="gen">
+    <br><br>
+    <div id="cvPAP">
+    <p id="q5">Does the patient have a history of Cervical PAP Smear?</p>
+    <label for="yes5"id="lab1">YES</label>
+    <input type="radio"id="yes5"name="gen1">
+    <label for="no5"id="lab2">NO</label>
+    <input type="radio"id="no5"name="gen1">
+    
+    <br><br>
+</div>
+    <p id="q1">Does the patient have a history of Condyloma?</p>
+    <label for="yes1">YES</label>
+    <input type="radio"id="yes1"name="gen2">
+    <label for="no1">NO</label>
+    <input type="radio"id="no1"name="gen2">
+    <br><br>
+<p id="q2">Does the patient have a history of Fulguration?</p>
+    <label for="yes4">YES</label>
+    <input type="radio"id="yes4"name="gen3">
+    <label for="no4">NO</label>
+    <input type="radio"id="no4"name="gen3">
+    <br>
+    <br>
+    <p id="q3">Does the patient have a history of Anal Cancer?</p>
+    <label for="yes2">YES</label>
+    <input type="radio"id="yes2"name="gen4">
+    <label for="no2">NO</label>
+    <input type="radio"id="no2"name="gen4">
+    <br>
+    <br>
+    <p id="q4">What is the patient's HIV status?</p>
+    <label for="yes3">POSITIVE</label>
+    <input type="radio"id="yes3"name="gen5">
+    <label for="no3">NEGATIVE</label>
+    <input type="radio"id="no3"name="gen5">
+    <br>
+    <br>
+    <p id="q6">What is the patient's PAP Smear result?</p>
+    <label for="norm1">NORMAL</label>
+    <input type="radio"id="norm1"name="gen6">
+    <br>
+    <label for="ASCUS1">ASCUS</label>
+    <input type="radio"id="ASCUS1"name="gen6">
+    <br>
+    <label for="LSIL1">LSIL</label>
+    <input type="radio"id="LSIL1"name="gen6">
+    <br>
+    <label for="HSIL1">HSIL</label>
+    <input type="radio"id="HSIL1"name="gen6">
+    <br><br>
+    <p id="q7">What is the patient's latest HRA result?</p>
+    <label for="norm2">NORMAL</label>
+    <input type="radio"id="norm2"name="gen7">
+    <br>
+    <label for="CONDY2">CONDYLOMA</label>
+    <input type="radio"id="CONDY2"name="gen7">
+    <br>
+    <label for="LSIL2">LSIL</label>
+    <input type="radio"id="LSIL2"name="gen7">
+    <br>
+    
+    <label for="HSIL2">HSIL</label>
+    <input type="radio"id="HSIL2"name="gen7">
+    <br>
+    <input type="radio"id="CANCER2"name="gen7">
+
+    <br><br><br><br>
+    <button id="submitButton" onclick="submit()" style="width:200px;height:50px;font-size:medium;background-color: transparent;">Submit</button>
+<br><br><br><br>
+    <a onclick="dadsWebsite()">By Sanghyun A. Kim</a>
+  </div>
+</div>
+  <script>
+    window.addEventListener('beforeunload', function (e) {
+        e.preventDefault();
+        e.returnValue = '';
+});
+   
+    function a(id){return document.getElementById(id);}
+    var fCol="DarkViolet";
+    function submit(){
+        //max kim's amazing unreadable code :)
+        var failed=false;
+
+       
+        
+        
+          var redir=""; 
+        
+        
+        
+          
+            
+        
+        
+        
+        
+        if((!a("norm2").checked&&!a("CONDY2").checked&&!a("LSIL2").checked&&!a("HSIL2").checked&&!a("CANCER2").checked)){redir="q7";
+        failed=true; a("q7").style.color=fCol;  a("q7").textContent="What is the patient's latest HRA result? *please check one of the fields."; }            
+        else{a("q7").textContent="What is the patient's latest HRA result?";a("q7").style.color="Black";}
+        
+        
+        if((!a("norm1").checked&&!a("ASCUS1").checked&&!a("LSIL1").checked&&!a("HSIL1").checked)){redir="q6";
+        failed=true; a("q6").style.color=fCol;  a("q6").textContent="What is the patient's PAP Smear result? *please check one of the fields."; }            
+        else{a("q6").textContent="What is the patient's PAP Smear Result?";a("q6").style.color="Black";}
+
+
+        if(!a("yes3").checked&&!a("no3").checked){redir="q4"; 
+            failed=true; a("q4").style.color=fCol;  a("q4").textContent="What is the patient's HIV Status? *please check one of the fields."; }            
+            else{a("q4").textContent="What is the patient's HIV Status";a("q4").style.color="Black";} 
+
+
+            if(!a("yes3").checked&&!a("no3").checked){a("q3").style.color=fCol;redir="q3";
+        failed=true; a("q3").textContent="Does the patient have a history of Anal Cancer? *please check one of the fields.";}            
+        else{a("q3").textContent="Does the patient have a history of Anal Cancer?";a("q3").style.color="Black";}  
+
+
+        if(!a("yes4").checked&&!a("no4").checked){redir="q2";
+            failed=true; a("q2").style.color=fCol;a("q2").textContent="Does the patient have a history of Fulguration? *please check one of the fields.";
+        }    else{a("q2").textContent="Does the patient have a history of Fulguration?";a("q2").style.color="Black";}       
+        
+
+        if(!a("yes1").checked&&!a("no1").checked){failed=true;redir="q1";
+            a("q1").textContent="Does the patient have a history of Condyloma? *please check one of the fields."; a("q1").style.color=fCol;}
+            else{a("q1").textContent="Does the patient have a history of Condyloma?";a("q1").style.color="Black";}  
+
+
+            
+        if(!a("yes5").checked&&!a("no5").checked){redir="q5";
+        failed=true; a("q5").style.color=fCol;  a("q5").textContent="Does the patient have a history of Cervical PAP Smear? *please check one of the fields."; }            
+        else{a("q5").textContent="Does the patient have a history of Cervical PAP Smear?";a("q5").style.color="Black";}
+        
+        if(!a("yes0").checked&&!a("no0").checked){redir="q0";
+        failed=true; a("q0").style.color=fCol;  a("q0").textContent="What is the patient's gender? *please check one of the fields."; }            
+        else{a("q0").textContent="What is the patient's gender?";a("q0").style.color="Black";}
+
+           
+        
+        if(failed){a(redir).scrollIntoView({behavior: 'smooth'}, true);return;}
+        //calculate now
+
+
+    }
+    function dadsWebsite(){
+        window.open("https://profiles.mountsinai.org/sanghyun-a-kim");
+    }
+    function init(){
+       
+
+    }
+    function disablePAP(){
+        if(!a("yes0").checked)return;
+        
+        a("cvPAP").style.display="none";
+        a("no5").checked=true;
+    }
+    function enablePAP(){
+        if(!a("no0").checked)return;
+        a("cvPAP").style.display="block";
+    }
+  </script>
+</html>
